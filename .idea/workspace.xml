@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5aa1371b-1a4d-4e10-ba22-fb7dcb73ef7a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_logs.log" beforeDir="false" afterPath="$PROJECT_DIR$/bot_logs.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkbot.service" beforeDir="false" afterPath="$PROJECT_DIR$/vkbot.service" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +29,9 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Serco\PycharmProjects\tests" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Serco\PycharmProjects\tests" />
     </key>
