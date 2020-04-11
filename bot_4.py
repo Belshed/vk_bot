@@ -10,12 +10,15 @@ import math
 
 import logging
 
-logger = logging.getLogger("Galimed Logs")
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('Galimed Logs')
 logger.setLevel(logging.INFO)
+'''
 fh = logging.FileHandler("bot_logs.log")
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 fh.setFormatter(formatter)
 logger.addHandler(fh)
+'''
 free_days = []
 ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
 # ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
