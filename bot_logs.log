@@ -331,3 +331,9 @@
 2020-04-11 14:29:18,493 - Galimed Logs - INFO - Запуск...
 2020-04-11 14:29:22,196 - Galimed Logs - INFO - Бот запущен
 2020-04-11 14:30:04,400 - Galimed Logs - INFO - 70618794 начал сессию
+2020-04-11 14:40:20,284 - Galimed Logs - INFO - Бот загружен
+2020-04-11 14:40:20,284 - Galimed Logs - INFO - Запуск...
+2020-04-11 14:40:20,932 - Galimed Logs - ERROR - Expecting value: line 1 column 1 (char 0)
+2020-04-11 14:40:24,593 - Galimed Logs - INFO - Бот загружен
+2020-04-11 14:40:24,593 - Galimed Logs - INFO - Запуск...
+2020-04-11 14:40:28,290 - Galimed Logs - INFO - Бот запущен
