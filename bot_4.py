@@ -20,8 +20,8 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 '''
 free_days = []
-ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
-# ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
+# ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
+ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
 
 
 class Day():
@@ -354,9 +354,9 @@ class MedBot():
                 return item
 
     def get_day_by_name(self, client, day_name) -> Day:
-        days = self.get_free_days_by_doctor(client.specialization, client.doctor, n=-1, offset=0)
-
+        days = self.get_free_days_by_doctor(client.specialization, client.doctor, n=5, offset=0)
         for day in days:
+            print(day.get_day_name())
             if day.get_day_name() == day_name:
                 return day
 
@@ -367,7 +367,7 @@ class MedBot():
             if doctor[0] == doctor_name:
                 return doctor[1]
 
-    def get_free_days_by_doctor(self, specialization, doctor_id, n=5, offset=0):
+    def get_free_days_by_doctor(self, specialization, doctor_id, n=5, offset=1):
         group   = self.get_group_by_name(specialization)
         shedule = self.get_shedule_by_doctor_id(group, doctor_id)
         days_list = []
@@ -381,7 +381,7 @@ class MedBot():
                 day_ned = day['day_ned']
                 is_saturday = day['saturday']
                 times = day['time']
-
+                print(times)
                 days_list.append(Day(month_name, month_number, month_short_name,
                                  day_number, day_ned, is_saturday, times))
 
