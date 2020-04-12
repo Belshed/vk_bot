@@ -20,9 +20,9 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 '''
 free_days = []
-ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
-# ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
-
+# ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
+ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
+global_name = ''
 
 class Day():
     def __init__(self,
@@ -117,7 +117,6 @@ class MedBot():
         self.retry_msg = requests.get(self.json_url).json()["welcom7"]
         self.errorss = requests.get(self.json_url).json()["errorss"]
         self.retry_always = requests.get(self.json_url).json()["nachat"]
-
     def run(self):
         longpoll = VkLongPoll(self.vk_session)
         vk = self.vk_session.get_api()
@@ -127,7 +126,7 @@ class MedBot():
 
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
-                if event.text == "/start" or event.text == self.retry_msg or event.text == self.retry_always or event.text == "Начать":
+                if event.text == "/start" or event.text == self.retry_msg or event.text == "Начать":
                     self.clients[event.user_id] = User(event.user_id)
                     logger.info(str(event.user_id) + " начал сессию")
                     vk.messages.send(
@@ -138,27 +137,33 @@ class MedBot():
 
                     self.clients[event.user_id].next_step = "specialization"
 
-                elif event.user_id in self.clients:
+                elif event.user_id in self.clients or event.text == self.retry_always:
 
                     client = self.clients[event.user_id]
                     client.display()
 
                     next_step = client.next_step
 
+                    if event.text == self.retry_always:
+                        next_step = "specialization"
+
                     if next_step == "specialization":
                         if len(event.text.split()) == 2:
-                            self.clients[event.user_id].name = event.text
+                            global global_name
+                            if event.text == self.retry_always:
+                                self.clients[event.user_id].name = global_name
+                            else:
+                                global_name = event.text
+                                self.clients[event.user_id].name = event.text
                             keyboard = self.get_specializations_keyboard().get_keyboard()
                             self.clients[event.user_id].next_step = "doctor"
 
                             message = self.spesialization_msg
-
                         else:
                             keyboard = VkKeyboard(one_time=True)
                             keyboard = self.add_retry_button(keyboard)
                             keyboard = keyboard.get_keyboard()
                             message = "Введите, пожалуйста, имя и фамилию через пробел"
-
 
                     if next_step == "doctor":
                         # CHOICE DOCTOR
@@ -269,6 +274,7 @@ class MedBot():
                             keyboard=keyboard,
                             random_id=get_random_id(),
                         )
+
                 else:
                     keyboard = VkKeyboard(one_time = True)
                     keyboard.add_button("Начать", color='primary', payload=[])
