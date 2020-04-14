@@ -136,25 +136,38 @@ class MedBot():
                     )
 
                     self.clients[event.user_id].next_step = "specialization"
-
+                elif event.text == 's' + self.retry_always:
+                    global next_step
+                    next_step = "specialization"
+                    self.clients[event.user_id].name = global_name
                 elif event.user_id in self.clients or event.text == self.retry_always:
 
                     client = self.clients[event.user_id]
                     client.display()
 
                     next_step = client.next_step
-
                     if event.text == self.retry_always:
+                        client = self.clients[event.user_id]
                         next_step = "specialization"
+                        client.next_step = 'specialization'
+                        self.clients[event.user_id].next_step = 'specialization'
+                        self.clients[event.user_id].doctor = None
+                        self.clients[event.user_id].doctor_id = None
+                        self.clients[event.user_id].day = None
+                        self.clients[event.user_id].full_day = None
 
                     if next_step == "specialization":
                         if len(event.text.split()) == 2:
-                            global global_name
+                            #global global_name
                             if event.text == self.retry_always:
                                 self.clients[event.user_id].name = global_name
                             else:
                                 global_name = event.text
                                 self.clients[event.user_id].name = event.text
+                            #if self.clients[event.user_id].name == None:
+
+                             #   global_name = event.text
+                              #  self.clients[event.user_id].name = event.text
                             keyboard = self.get_specializations_keyboard().get_keyboard()
                             self.clients[event.user_id].next_step = "doctor"
 
