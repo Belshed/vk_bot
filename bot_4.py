@@ -101,22 +101,33 @@ class MedBot():
         self.clients = {}
 
         self.n_days_view = 5
-
+        self.no_doctors = ''
+        self.server_connection = False
         self.refresh_bot()
 
     def refresh_bot(self):
-        self.specializations = self.get_specializations()
+        try:
+            self.specializations = self.get_specializations()
+            self.welcome = requests.get(self.json_url).json()["welcome"]
+            self.fine = requests.get(self.json_url).json()["fine"]
+            self.spesialization_msg = requests.get(self.json_url).json()["welcom2"]
+            self.doctor_msg = requests.get(self.json_url).json()["welcom3"]
+            self.date_msg = requests.get(self.json_url).json()["welcom4"]
+            self.time_msg = requests.get(self.json_url).json()["welcom5"]
+            self.last_msg = requests.get(self.json_url).json()["welcom6"]
+            self.retry_msg = requests.get(self.json_url).json()["welcom7"]
+            self.no_doctors = requests.get(self.json_url).json()["welcom8"]
+            self.errorss = requests.get(self.json_url).json()["errorss"]
+            self.retry_always = requests.get(self.json_url).json()["nachat"]
+            marker = requests.get(self.json_url).json()
+            if marker.groups == None:
+                self.server_connection = False
+            else:
+                self.server_connection = True
+        except:
+            logger.error("Нет соединения с сервером!")
 
-        self.welcome = requests.get(self.json_url).json()["welcome"]
-        self.fine = requests.get(self.json_url).json()["fine"]
-        self.spesialization_msg = requests.get(self.json_url).json()["welcom2"]
-        self.doctor_msg = requests.get(self.json_url).json()["welcom3"]
-        self.date_msg = requests.get(self.json_url).json()["welcom4"]
-        self.time_msg = requests.get(self.json_url).json()["welcom5"]
-        self.last_msg = requests.get(self.json_url).json()["welcom6"]
-        self.retry_msg = requests.get(self.json_url).json()["welcom7"]
-        self.errorss = requests.get(self.json_url).json()["errorss"]
-        self.retry_always = requests.get(self.json_url).json()["nachat"]
+
     def run(self):
         longpoll = VkLongPoll(self.vk_session)
         vk = self.vk_session.get_api()
@@ -129,17 +140,31 @@ class MedBot():
                 if event.text == "/start" or event.text == self.retry_msg or event.text == "Начать":
                     self.clients[event.user_id] = User(event.user_id)
                     logger.info(str(event.user_id) + " начал сессию")
+                    if self.server_connection == True:
+                        vk.messages.send(
+                            user_id=event.user_id,
+                            message=self.welcome,
+                            random_id=get_random_id(),
+                        )
+                    else:
+                        vk.messages.send(
+                            user_id=event.user_id,
+                            message=self.no_doctors,
+                            random_id=get_random_id(),
+                        )
+                        next_step = ''
+                        event.text = ''
+                        event.user_id = None
+                elif self.server_connection == False:
                     vk.messages.send(
                         user_id=event.user_id,
-                        message=self.welcome,
+                        message=self.no_doctors,
                         random_id=get_random_id(),
                     )
+                    next_step = ''
+                    event.text = ''
+                    event.user_id = None
 
-                    self.clients[event.user_id].next_step = "specialization"
-                elif event.text == 's' + self.retry_always:
-                    global next_step
-                    next_step = "specialization"
-                    self.clients[event.user_id].name = global_name
                 elif event.user_id in self.clients or event.text == self.retry_always:
 
                     client = self.clients[event.user_id]
@@ -158,16 +183,12 @@ class MedBot():
 
                     if next_step == "specialization":
                         if len(event.text.split()) == 2:
-                            #global global_name
                             if event.text == self.retry_always:
                                 self.clients[event.user_id].name = global_name
                             else:
                                 global_name = event.text
                                 self.clients[event.user_id].name = event.text
-                            #if self.clients[event.user_id].name == None:
 
-                             #   global_name = event.text
-                              #  self.clients[event.user_id].name = event.text
                             keyboard = self.get_specializations_keyboard().get_keyboard()
                             self.clients[event.user_id].next_step = "doctor"
 
@@ -350,8 +371,10 @@ class MedBot():
 
     def get_specializations(self):
         data = requests.get(self.json_url).json()
-        groups = [group["name"] for group in data["groups"]]
-
+        try:
+            groups = [group["name"] for group in data["groups"]]
+        except:
+            groups = self.no_doctors
         return groups
 
     def get_group_by_name(self, name):
@@ -414,6 +437,7 @@ while True:
         logger.info("Запуск...")
 
         bot.run()
+
     except Exception as e:
         logger.error(str(e))
         print("Перезапуск...")
