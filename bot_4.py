@@ -20,8 +20,8 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 '''
 free_days = []
-# ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
-ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
+ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
+# ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
 global_name = ''
 
 class Day():
@@ -147,18 +147,26 @@ class MedBot():
                             random_id=get_random_id(),
                         )
                     else:
+                        keyboard = VkKeyboard(one_time=True)
+                        keyboard = self.add_retry_button(keyboard)
+                        keyboard = keyboard.get_keyboard()
                         vk.messages.send(
                             user_id=event.user_id,
                             message=self.no_doctors,
+                            keyboard=keyboard,
                             random_id=get_random_id(),
                         )
                         next_step = ''
                         event.text = ''
                         event.user_id = None
                 elif self.server_connection == False:
+                    keyboard = VkKeyboard(one_time=True)
+                    keyboard = self.add_retry_button(keyboard)
+                    keyboard = keyboard.get_keyboard()
                     vk.messages.send(
                         user_id=event.user_id,
                         message=self.no_doctors,
+                        keyboard=keyboard,
                         random_id=get_random_id(),
                     )
                     next_step = ''
