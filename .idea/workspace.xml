@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5aa1371b-1a4d-4e10-ba22-fb7dcb73ef7a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +37,7 @@
       <recent name="C:\Users\Serco\PycharmProjects\tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.bot">
+  <component name="RunManager" selected="Python.bot_4">
     <configuration name="bot" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="tests" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -123,8 +124,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.bot" />
         <item itemvalue="Python.bot_4" />
+        <item itemvalue="Python.bot" />
         <item itemvalue="Python.bot_6" />
         <item itemvalue="Python.main" />
       </list>
@@ -158,22 +159,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="710" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586606321315" />
-    <state width="1899" height="163" key="GridCell.Tab.0.bottom" timestamp="1587201798345">
+    <state width="1899" height="163" key="GridCell.Tab.0.bottom" timestamp="1587206686901">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="163" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587201798345" />
-    <state width="1899" height="163" key="GridCell.Tab.0.center" timestamp="1587201798345">
+    <state width="1899" height="163" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587206686901" />
+    <state width="1899" height="163" key="GridCell.Tab.0.center" timestamp="1587206686901">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="163" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587201798345" />
-    <state width="1899" height="163" key="GridCell.Tab.0.left" timestamp="1587201798345">
+    <state width="1899" height="163" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587206686901" />
+    <state width="1899" height="163" key="GridCell.Tab.0.left" timestamp="1587206686901">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="163" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587201798345" />
-    <state width="1899" height="163" key="GridCell.Tab.0.right" timestamp="1587201798345">
+    <state width="1899" height="163" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587206686901" />
+    <state width="1899" height="163" key="GridCell.Tab.0.right" timestamp="1587206686901">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="163" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587201798345" />
+    <state width="1899" height="163" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587206686901" />
     <state width="1899" height="196" key="GridCell.Tab.1.bottom" timestamp="1587199667185">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

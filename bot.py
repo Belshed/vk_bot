@@ -129,6 +129,7 @@ class MedBot():
     def refresh_doctors(self):
         try:
             marker = requests.get(self.json_url).json()["groups"]
+            self.server_available = True
         except:
             logger.error("Нет соединения с сервером!")
             self.server_available = False

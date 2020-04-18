@@ -129,7 +129,8 @@ class MedBot():
 
     def refresh_doctors(self):
         try:
-            marker = requests.get(self.json_url).json()["groups"]
+            self.specializations = self.get_specializations()
+            self.server_available = True
         except:
             logger.error("Нет соединения с сервером!")
             self.server_available = False
@@ -165,6 +166,7 @@ class MedBot():
                             keyboard=keyboard,
                             random_id=get_random_id(),
                         )
+                        self.clients[event.user_id].next_step = ""
 
                 elif event.user_id in self.clients or event.text == self.retry_always:
                     self.refresh_doctors()
