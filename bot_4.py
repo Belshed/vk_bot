@@ -20,8 +20,8 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 '''
 free_days = []
-ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
-# ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
+# ACCESS_TOKEN = "21df12be02decad1794736ccba47d0a87cac6c7decd0dd32910ffd4d5005aa7441a6042bd6ff2c47d26ee"
+ACCESS_TOKEN = "f802f8143b2a5670d79a3afbcb4d8ee8a6f1dd96a7a40844bd87cb167bb077fa958c583d7d1da1900b3c8" # test_token
 global_name = ''
 
 
@@ -169,7 +169,8 @@ class MedBot():
                         self.clients[event.user_id].next_step = ""
 
                 elif event.user_id in self.clients or event.text == self.retry_always:
-                    self.refresh_doctors()
+                    if event.text == self.retry_always:
+                        self.refresh_doctors()
                     if not self.server_available:
                         keyboard = VkKeyboard(one_time=True)
                         keyboard = self.add_retry_button(keyboard)
@@ -195,6 +196,10 @@ class MedBot():
                             self.clients[event.user_id].doctor = None
                             self.clients[event.user_id].doctor_id = None
                             self.clients[event.user_id].day = None
+                            self.clients[event.user_id].full_day = None
+                            self.clients[event.user_id].specialization = None
+                            self.clients[event.user_id].telephone = None
+                            self.clients[event.user_id].offset = 0
                             self.clients[event.user_id].full_day = None
 
                         if next_step == "specialization":
